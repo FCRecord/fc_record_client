@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import Table from "@/components/common/Table";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,11 +31,49 @@ const Button = styled.button`
   }
 `;
 
+interface User {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+}
+
+// 데이터 예시
+const dataSource: User[] = [
+  { key: "1", name: "John Doe", age: 32, address: "New York" },
+  { key: "2", name: "Jane Smith", age: 28, address: "London" },
+  { key: "3", name: "Mike Johnson", age: 40, address: "Sydney" },
+];
+
+// 테이블 컬럼 정의
+const columns = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Age",
+    dataIndex: "age",
+    key: "age",
+  },
+  {
+    title: "Address",
+    dataIndex: "address",
+    key: "address",
+  },
+];
+
 export default function Home() {
   return (
     <Container>
       <Title>Project setup</Title>
       <Button>test</Button>
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        pagination={{ pageSize: 5 }}
+      />
     </Container>
   );
 }

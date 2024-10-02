@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import Table from "@/components/common/Table";
+import CustomCheckBox from "@/components/common/CheckBox";
 
 const Container = styled.div`
   display: flex;
@@ -74,6 +75,7 @@ export default function Home() {
         columns={columns}
         pagination={{ pageSize: 5 }}
       />
+      <CustomCheckBox />
     </Container>
   );
 }

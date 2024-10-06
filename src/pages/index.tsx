@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import Table from "@/components/common/Table";
 import CustomCheckBox from "@/components/common/CheckBox";
+import CustomButton from "@/components/common/Button";
 
 const Container = styled.div`
   display: flex;
@@ -76,6 +77,18 @@ export default function Home() {
         pagination={{ pageSize: 5 }}
       />
       <CustomCheckBox />
+      <CustomButton
+        isLoading={true}
+        onClick={() => console.log("onclick button")}
+      >
+        test
+      </CustomButton>
+      <CustomButton
+        variant="danger"
+        onClick={() => console.log("onclick button")}
+      >
+        test1
+      </CustomButton>
     </Container>
   );
 }

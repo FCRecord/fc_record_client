@@ -3,14 +3,15 @@ import styled from "styled-components";
 import Table from "@/components/common/Table";
 import CustomCheckBox from "@/components/common/CheckBox";
 import CustomButton from "@/components/common/Button";
+import Header from "@/components/Header";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-color: #f0f0f0;
+  height: 90vh;
+  background-color: #e5e5e5;
 `;
 
 const Title = styled.h1`
@@ -68,27 +69,30 @@ const columns = [
 
 export default function Home() {
   return (
-    <Container>
-      <Title>Project setup</Title>
-      <Button>test</Button>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        pagination={{ pageSize: 5 }}
-      />
-      <CustomCheckBox />
-      <CustomButton
-        isLoading={true}
-        onClick={() => console.log("onclick button")}
-      >
-        test
-      </CustomButton>
-      <CustomButton
-        variant="danger"
-        onClick={() => console.log("onclick button")}
-      >
-        test1
-      </CustomButton>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Title>Project setup</Title>
+        <Button>test</Button>
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          pagination={{ pageSize: 5 }}
+        />
+        <CustomCheckBox />
+        <CustomButton
+          isLoading={true}
+          onClick={() => console.log("onclick button")}
+        >
+          test
+        </CustomButton>
+        <CustomButton
+          variant="danger"
+          onClick={() => console.log("onclick button")}
+        >
+          test1
+        </CustomButton>
+      </Container>
+    </>
   );
 }

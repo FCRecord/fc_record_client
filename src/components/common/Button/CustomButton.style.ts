@@ -37,7 +37,6 @@ export const Button = styled.button<{
 
 export const SpinnerWrapper = styled.div`
   width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;

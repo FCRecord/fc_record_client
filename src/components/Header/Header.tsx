@@ -28,7 +28,7 @@ const Header = () => {
         <S.LogoWrapper>
           <Image src={"/Logo.png"} layout="fill" alt="로고" />
         </S.LogoWrapper>
-        <div>login</div>
+        <S.loginBtn>Login</S.loginBtn>
       </S.Wrapper>
     </>
   );

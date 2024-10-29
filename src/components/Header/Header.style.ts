@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
+import { TEXT } from "@/styles/TextStyle";
 export const Wrapper = styled.div`
   width: 100%;
   height: 8vh;
@@ -32,4 +33,20 @@ export const Overlay = styled(motion.div)`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
+`;
+
+export const loginBtn = styled.button`
+  min-height: 50%;
+  min-width: 5%;
+  background-color: white;
+  border: solid 2px #212121;
+  border-radius: 25px;
+  cursor: pointer;
+  ${TEXT.black1_bold_1_5vh}
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: var(--black-1);
+    color: var(--white-1);
+  }
 `;

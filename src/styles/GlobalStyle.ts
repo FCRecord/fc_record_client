@@ -6,6 +6,12 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  :root {
+  --black-1: #212121;
+
+  --white-1: #ffffff;
+}
 `;
 
 export default GlobalStyle;

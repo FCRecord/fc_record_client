@@ -1,5 +1,3 @@
-// .storybook/main.ts
-
 import path from "path";
 import type { StorybookConfig } from "@storybook/nextjs";
 
@@ -21,7 +19,9 @@ const config: StorybookConfig = {
     config.resolve = {
       ...(config.resolve || {}),
       alias: {
+        ...(config.resolve?.alias || {}),
         src: path.resolve(__dirname, "../src"),
+        "next/image": path.resolve(__dirname, "MockNextImage.tsx"),
       },
       modules: [path.resolve(__dirname, "../src"), "node_modules"],
     };

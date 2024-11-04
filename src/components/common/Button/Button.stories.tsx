@@ -1,8 +1,38 @@
 import React from "react";
-import Button from "./index";
+import { StoryFn, Meta } from "@storybook/react";
+import CustomButton from "./CustomButton";
+import { ButtonProps } from "./CustomButton.type";
 
 export default {
-  component: Button,
-};
+  title: "Components/Common/Button",
+  component: CustomButton,
+  args: {
+    children: "Click Me",
+    variant: "primary",
+    isLoading: false,
+  },
+  argTypes: {
+    children: { control: "text" },
+    variant: {
+      control: { type: "select" },
+      options: [
+        "default",
+        "primary",
+        "secondary",
+        "danger",
+        "success",
+        "danger",
+      ],
+    },
+    isLoading: { control: "boolean" },
+  },
+} as Meta<ButtonProps>;
 
-export const Default = () => <Button variant="danger" />;
+const Template: StoryFn<ButtonProps> = (args) => <CustomButton {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {
+  children: "Button",
+  variant: "primary",
+  isLoading: false,
+};

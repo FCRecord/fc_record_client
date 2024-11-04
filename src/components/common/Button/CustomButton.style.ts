@@ -61,27 +61,27 @@ const getVariantStyle = (variant: Variant) => {
   switch (variant) {
     case "default":
       return css`
-        background-color: #e0e0e0; /* Light gray */
+        background-color: #e0e0e0;
       `;
     case "primary":
       return css`
-        background-color: #1e90ff; /* Dodger Blue */
+        background-color: #1e90ff;
       `;
     case "secondary":
       return css`
-        background-color: #87cefa; /* Light Sky Blue */
+        background-color: #87cefa;
       `;
     case "success":
       return css`
-        background-color: #32cd32; /* Lime Green */
+        background-color: #32cd32;
       `;
     case "danger":
       return css`
-        background-color: #ff6347; /* Tomato */
+        background-color: #ff6347;
       `;
     default:
       return css`
-        background-color: #e0e0e0; /* 기본 스타일 설정 */
+        background-color: #e0e0e0;
       `;
   }
 };
@@ -90,27 +90,27 @@ const getHoverStyle = (variant: Variant) => {
   switch (variant) {
     case "default":
       return css`
-        background-color: #b0b0b0; /* Darker gray */
+        background-color: #b0b0b0;
       `;
     case "primary":
       return css`
-        background-color: #1c86ee; /* Dodger Blue hover */
+        background-color: #1c86ee;
       `;
     case "secondary":
       return css`
-        background-color: #4682b4; /* Steel Blue */
+        background-color: #4682b4;
       `;
     case "success":
       return css`
-        background-color: #228b22; /* Forest Green */
+        background-color: #228b22;
       `;
     case "danger":
       return css`
-        background-color: #ff4500; /* Orange Red */
+        background-color: #ff4500;
       `;
     default:
       return css`
-        background-color: #b0b0b0; /* 기본 hover 스타일 */
+        background-color: #b0b0b0;
       `;
   }
 };

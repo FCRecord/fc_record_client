@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   align-items: center;
   padding: 0 25px;
   background-color: #ffffff;
+  margin-bottom: 50px;
 `;
 
 export const LogoWrapper = styled.div`

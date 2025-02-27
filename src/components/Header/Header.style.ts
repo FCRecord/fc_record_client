@@ -40,7 +40,7 @@ export const loginBtn = styled.button`
   min-height: 50%;
   min-width: 5%;
   background-color: white;
-  border: solid 2px #212121;
+  border: solid 2px var(--black-1);
   border-radius: 25px;
   cursor: pointer;
   ${TEXT.black1_bold_1_5vh}

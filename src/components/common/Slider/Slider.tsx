@@ -10,7 +10,7 @@ import * as S from "./Slider.style";
 
 const Slider = () => {
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const [type, setType] = useState("max");
+  const [type, setType] = useState("none");
   const [dragging, setDragging] = useState<"thumb1" | "thumb2" | null>(null);
   const [thumbPosition1, setThumbPosition1] = useState(0); // 임시값 props로 받아올 예정
   const [thumbPosition2, setThumbPosition2] = useState(60); // 임시값 props로 받아올 예정
@@ -25,18 +25,26 @@ const Slider = () => {
 
       if (type === "max") {
         if (dragging === "thumb2") {
-          setThumbPosition2(Math.max(clampedPosition, thumbPosition1));
+          setThumbPosition2(
+            Math.floor(Math.max(clampedPosition, thumbPosition1))
+          );
         }
       } else if (type === "min") {
         if (dragging === "thumb1") {
-          setThumbPosition1(Math.min(clampedPosition, thumbPosition2));
+          setThumbPosition1(
+            Math.floor(Math.min(clampedPosition, thumbPosition2))
+          );
         }
       } else {
         if (dragging === "thumb1") {
-          setThumbPosition1(Math.min(clampedPosition, thumbPosition2));
+          setThumbPosition1(
+            Math.floor(Math.min(clampedPosition, thumbPosition2))
+          );
         }
         if (dragging === "thumb2") {
-          setThumbPosition2(Math.max(clampedPosition, thumbPosition1));
+          setThumbPosition2(
+            Math.floor(Math.max(clampedPosition, thumbPosition1))
+          );
         }
       }
     },
@@ -89,14 +97,18 @@ const Slider = () => {
           <S.Thumb
             position={thumbPosition1}
             onMouseDown={handleMouseDown("thumb1")}
-          />
+          >
+            <S.Label>{thumbPosition1}</S.Label>
+          </S.Thumb>
         )}
         <S.Range left={getLeft()} width={getWidth()} />
         {type !== "min" && (
           <S.Thumb
             position={thumbPosition2}
             onMouseDown={handleMouseDown("thumb2")}
-          />
+          >
+            <S.Label>{thumbPosition2}</S.Label>
+          </S.Thumb>
         )}
       </S.Track>
     </S.SliderContainer>

@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
+import { TEXT } from "@/styles/TextStyle";
 export const SliderContainer = styled.div`
   width: 100%;
-  padding: 10px;
+  padding: 0 30px;
 `;
 
 export const Track = styled.div`
@@ -37,4 +38,19 @@ export const Thumb = styled.div<{ position: number }>`
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   }
   z-index: 999;
+`;
+
+export const Label = styled.span`
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: var(--black-1);
+  ${TEXT.black1_bold_15px};
+  padding: 2px 4px;
+  border: 1px solid var(--gray-2);
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
 `;

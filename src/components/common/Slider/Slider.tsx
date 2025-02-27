@@ -5,50 +5,65 @@ import React, {
   useEffect,
   MouseEvent,
 } from "react";
-
 import * as S from "./Slider.style";
+import { ThumbType, SliderType, SliderProps } from "./Slider.type";
 
-const Slider = () => {
+const Slider = ({
+  type = "none",
+  minValue = 1,
+  maxValue = 30,
+}: SliderProps) => {
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const [type, setType] = useState("none");
-  const [dragging, setDragging] = useState<"thumb1" | "thumb2" | null>(null);
-  const [thumbPosition1, setThumbPosition1] = useState(0); // 임시값 props로 받아올 예정
-  const [thumbPosition2, setThumbPosition2] = useState(60); // 임시값 props로 받아올 예정
+  const [dragging, setDragging] = useState<ThumbType>(null);
+  const [firstThumbPosition, setFirstThumbPosition] = useState(minValue);
+  const [secondThumbPosition, setSecondThumbPosition] = useState(maxValue);
 
   const handleMouseMove = useCallback(
     (event: MouseEvent) => {
       if (!dragging || !trackRef.current) return;
 
       const rect = trackRef.current.getBoundingClientRect();
-      const newPosition = ((event.clientX - rect.left) / rect.width) * 100;
-      const clampedPosition = Math.min(Math.max(newPosition, 0), 100);
+      const newPosition =
+        ((event.clientX - rect.left) / rect.width) * (maxValue - minValue) +
+        minValue;
+      const clampedPosition = Math.min(
+        Math.max(newPosition, minValue),
+        maxValue
+      );
 
       if (type === "max") {
-        if (dragging === "thumb2") {
-          setThumbPosition2(
-            Math.floor(Math.max(clampedPosition, thumbPosition1))
+        if (dragging === "secondThumb") {
+          setSecondThumbPosition(
+            Math.floor(Math.max(clampedPosition, firstThumbPosition))
           );
         }
       } else if (type === "min") {
-        if (dragging === "thumb1") {
-          setThumbPosition1(
-            Math.floor(Math.min(clampedPosition, thumbPosition2))
+        if (dragging === "firstThumb") {
+          setFirstThumbPosition(
+            Math.floor(Math.min(clampedPosition, secondThumbPosition))
           );
         }
       } else {
-        if (dragging === "thumb1") {
-          setThumbPosition1(
-            Math.floor(Math.min(clampedPosition, thumbPosition2))
+        if (dragging === "firstThumb") {
+          setFirstThumbPosition(
+            Math.floor(Math.min(clampedPosition, secondThumbPosition))
           );
         }
-        if (dragging === "thumb2") {
-          setThumbPosition2(
-            Math.floor(Math.max(clampedPosition, thumbPosition1))
+        if (dragging === "secondThumb") {
+          setSecondThumbPosition(
+            Math.floor(Math.max(clampedPosition, firstThumbPosition))
           );
         }
       }
     },
-    [dragging, type, thumbPosition1, thumbPosition2]
+    [
+      dragging,
+      type,
+      firstThumbPosition,
+      secondThumbPosition,
+      minValue,
+      maxValue,
+    ]
   );
 
   useEffect(() => {
@@ -60,7 +75,7 @@ const Slider = () => {
     };
   }, [handleMouseMove]);
 
-  const handleMouseDown = (thumb: "thumb1" | "thumb2") => () => {
+  const handleMouseDown = (thumb: ThumbType) => () => {
     setDragging(thumb);
   };
 
@@ -75,18 +90,21 @@ const Slider = () => {
       case "min":
         return 100;
       default:
-        return thumbPosition1;
+        return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
     }
   };
 
   const getWidth = () => {
     switch (type) {
       case "max":
-        return thumbPosition2;
+        return ((secondThumbPosition - minValue) / (maxValue - minValue)) * 100;
       case "min":
-        return thumbPosition1 - thumbPosition1;
+        return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
       default:
-        return thumbPosition2 - thumbPosition1;
+        return (
+          ((secondThumbPosition - firstThumbPosition) / (maxValue - minValue)) *
+          100
+        );
     }
   };
 
@@ -95,19 +113,23 @@ const Slider = () => {
       <S.Track ref={trackRef}>
         {type !== "max" && (
           <S.Thumb
-            position={thumbPosition1}
-            onMouseDown={handleMouseDown("thumb1")}
+            position={
+              ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100
+            }
+            onMouseDown={handleMouseDown("firstThumb")}
           >
-            <S.Label>{thumbPosition1}</S.Label>
+            <S.Label>{firstThumbPosition}</S.Label>
           </S.Thumb>
         )}
         <S.Range left={getLeft()} width={getWidth()} />
         {type !== "min" && (
           <S.Thumb
-            position={thumbPosition2}
-            onMouseDown={handleMouseDown("thumb2")}
+            position={
+              ((secondThumbPosition - minValue) / (maxValue - minValue)) * 100
+            }
+            onMouseDown={handleMouseDown("secondThumb")}
           >
-            <S.Label>{thumbPosition2}</S.Label>
+            <S.Label>{secondThumbPosition}</S.Label>
           </S.Thumb>
         )}
       </S.Track>

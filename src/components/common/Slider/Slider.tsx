@@ -1,25 +1,23 @@
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-  MouseEvent,
-} from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
+
 import * as S from "./Slider.style";
-import { ThumbType, SliderType, SliderProps } from "./Slider.type";
+import { handleMouseDown, handleMouseUp, getLeft, getWidth } from "./useSlider";
+import { ThumbType, SliderProps } from "./Slider.type";
 
 const Slider = ({
-  type = "none",
-  minValue = 1,
-  maxValue = 30,
+  type,
+  minValue,
+  maxValue,
+  firstThumbPosition,
+  setFirstThumbPosition,
+  secondThumbPosition,
+  setSecondThumbPosition,
 }: SliderProps) => {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<ThumbType>(null);
-  const [firstThumbPosition, setFirstThumbPosition] = useState(minValue);
-  const [secondThumbPosition, setSecondThumbPosition] = useState(maxValue);
 
   const handleMouseMove = useCallback(
-    (event: MouseEvent) => {
+    (event: globalThis.MouseEvent) => {
       if (!dragging || !trackRef.current) return;
 
       const rect = trackRef.current.getBoundingClientRect();
@@ -67,46 +65,18 @@ const Slider = ({
   );
 
   useEffect(() => {
+    setFirstThumbPosition(minValue);
+    setSecondThumbPosition(maxValue);
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseup", () => handleMouseUp(setDragging));
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.addEventListener("mouseup", () => handleMouseUp(setDragging));
     };
   }, [handleMouseMove]);
-
-  const handleMouseDown = (thumb: ThumbType) => () => {
-    setDragging(thumb);
-  };
-
-  const handleMouseUp = () => {
-    setDragging(null);
-  };
-
-  const getLeft = () => {
-    switch (type) {
-      case "max":
-        return 0;
-      case "min":
-        return 100;
-      default:
-        return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
-    }
-  };
-
-  const getWidth = () => {
-    switch (type) {
-      case "max":
-        return ((secondThumbPosition - minValue) / (maxValue - minValue)) * 100;
-      case "min":
-        return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
-      default:
-        return (
-          ((secondThumbPosition - firstThumbPosition) / (maxValue - minValue)) *
-          100
-        );
-    }
-  };
 
   return (
     <S.SliderContainer>
@@ -116,18 +86,33 @@ const Slider = ({
             position={
               ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100
             }
-            onMouseDown={handleMouseDown("firstThumb")}
+            onMouseDown={handleMouseDown({
+              ThumbType: "firstThumb",
+              setDragging,
+            })}
           >
             <S.Label>{firstThumbPosition}</S.Label>
           </S.Thumb>
         )}
-        <S.Range left={getLeft()} width={getWidth()} />
+        <S.Range
+          left={getLeft({ type, firstThumbPosition, minValue, maxValue })}
+          width={getWidth({
+            type,
+            firstThumbPosition,
+            secondThumbPosition,
+            minValue,
+            maxValue,
+          })}
+        />
         {type !== "min" && (
           <S.Thumb
             position={
               ((secondThumbPosition - minValue) / (maxValue - minValue)) * 100
             }
-            onMouseDown={handleMouseDown("secondThumb")}
+            onMouseDown={handleMouseDown({
+              ThumbType: "secondThumb",
+              setDragging,
+            })}
           >
             <S.Label>{secondThumbPosition}</S.Label>
           </S.Thumb>

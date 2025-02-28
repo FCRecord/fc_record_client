@@ -14,6 +14,7 @@ export interface handleMouseDownProps {
 export interface getLeftProps {
   type: SliderType;
   firstThumbPosition: number;
+  secondThumbPosition: number;
   minValue: number;
   maxValue: number;
 }

@@ -23,9 +23,9 @@ export const getLeft = ({
 }: getLeftProps) => {
   switch (type) {
     case "max":
-      return 0;
+      return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
     case "min":
-      return 100;
+      return 0;
     default:
       return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
   }
@@ -40,7 +40,7 @@ export const getWidth = ({
 }: getWidthProps) => {
   switch (type) {
     case "max":
-      return ((secondThumbPosition - minValue) / (maxValue - minValue)) * 100;
+      return ((maxValue - firstThumbPosition) / (maxValue - minValue)) * 100;
     case "min":
       return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
     default:

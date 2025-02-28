@@ -30,15 +30,15 @@ const Slider = ({
       );
 
       if (type === "max") {
-        if (dragging === "secondThumb") {
-          setSecondThumbPosition(
-            Math.floor(Math.max(clampedPosition, firstThumbPosition))
+        if (dragging === "firstThumb") {
+          setFirstThumbPosition(
+            Math.floor(Math.max(clampedPosition, minValue))
           );
         }
       } else if (type === "min") {
         if (dragging === "firstThumb") {
           setFirstThumbPosition(
-            Math.floor(Math.min(clampedPosition, secondThumbPosition))
+            Math.floor(Math.min(clampedPosition, maxValue))
           );
         }
       } else {
@@ -81,21 +81,25 @@ const Slider = ({
   return (
     <S.SliderContainer>
       <S.Track ref={trackRef}>
-        {type !== "max" && (
-          <S.Thumb
-            position={
-              ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100
-            }
-            onMouseDown={handleMouseDown({
-              ThumbType: "firstThumb",
-              setDragging,
-            })}
-          >
-            <S.Label>{firstThumbPosition}</S.Label>
-          </S.Thumb>
-        )}
+        <S.Thumb
+          position={
+            ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100
+          }
+          onMouseDown={handleMouseDown({
+            ThumbType: "firstThumb",
+            setDragging,
+          })}
+        >
+          <S.Label>{firstThumbPosition}</S.Label>
+        </S.Thumb>
         <S.Range
-          left={getLeft({ type, firstThumbPosition, minValue, maxValue })}
+          left={getLeft({
+            type,
+            firstThumbPosition,
+            secondThumbPosition,
+            minValue,
+            maxValue,
+          })}
           width={getWidth({
             type,
             firstThumbPosition,
@@ -104,7 +108,7 @@ const Slider = ({
             maxValue,
           })}
         />
-        {type !== "min" && (
+        {type === "none" && (
           <S.Thumb
             position={
               ((secondThumbPosition - minValue) / (maxValue - minValue)) * 100

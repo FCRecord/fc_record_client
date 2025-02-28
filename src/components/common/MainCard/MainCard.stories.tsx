@@ -1,5 +1,6 @@
 import React from "react";
 import { StoryFn, Meta } from "@storybook/react";
+
 import MainCard from "./MainCard";
 import { MainCardProps } from "./MainCard.type";
 

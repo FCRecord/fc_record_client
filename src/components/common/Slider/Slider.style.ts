@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { TEXT } from "@/styles/TextStyle";
 export const SliderContainer = styled.div`
   width: 100%;
-  padding: 0 30px;
+  padding: 30px;
 `;
 
 export const Track = styled.div`

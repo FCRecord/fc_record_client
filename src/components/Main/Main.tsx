@@ -11,7 +11,7 @@ const Main = () => {
     <S.container>
       {/* TODO: 해당슬라이더 마크업 작업 완료후 삭제 예정 */}
       <Slider
-        type="none"
+        type="min"
         minValue={1}
         maxValue={50}
         firstThumbPosition={firstThumbPosition}

@@ -14,21 +14,20 @@ export interface handleMouseDownProps {
 export interface getLeftProps {
   type: SliderType;
   firstThumbPosition: number;
-  secondThumbPosition: number;
   minValue: number;
   maxValue: number;
 }
 
 export interface getWidthProps extends getLeftProps {
-  secondThumbPosition: number;
+  secondThumbPosition?: number;
 }
 
 export interface SliderProps {
   type: SliderType;
   firstThumbPosition: number;
-  secondThumbPosition: number;
+  secondThumbPosition?: number;
   setFirstThumbPosition: Dispatch<SetStateAction<number>>;
-  setSecondThumbPosition: Dispatch<SetStateAction<number>>;
+  setSecondThumbPosition?: Dispatch<SetStateAction<number>>;
   minValue: number;
   maxValue: number;
 }

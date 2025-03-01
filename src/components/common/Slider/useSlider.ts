@@ -44,9 +44,9 @@ export const getWidth = ({
     case "min":
       return ((firstThumbPosition - minValue) / (maxValue - minValue)) * 100;
     default:
+      const validSecondThumb = secondThumbPosition ?? maxValue;
       return (
-        ((secondThumbPosition - firstThumbPosition) / (maxValue - minValue)) *
-        100
+        ((validSecondThumb - firstThumbPosition) / (maxValue - minValue)) * 100
       );
   }
 };

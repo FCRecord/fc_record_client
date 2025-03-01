@@ -44,11 +44,13 @@ const Slider = ({
       } else {
         if (dragging === "firstThumb") {
           setFirstThumbPosition(
-            Math.floor(Math.min(clampedPosition, secondThumbPosition))
+            Math.floor(
+              Math.min(clampedPosition, secondThumbPosition ?? maxValue)
+            )
           );
         }
         if (dragging === "secondThumb") {
-          setSecondThumbPosition(
+          setSecondThumbPosition?.(
             Math.floor(Math.max(clampedPosition, firstThumbPosition))
           );
         }
@@ -66,8 +68,10 @@ const Slider = ({
 
   useEffect(() => {
     setFirstThumbPosition(minValue);
-    setSecondThumbPosition(maxValue);
-  }, []);
+    if (type === "none") {
+      setSecondThumbPosition?.(maxValue);
+    }
+  }, [type]);
 
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
@@ -96,7 +100,6 @@ const Slider = ({
           left={getLeft({
             type,
             firstThumbPosition,
-            secondThumbPosition,
             minValue,
             maxValue,
           })}
@@ -108,7 +111,7 @@ const Slider = ({
             maxValue,
           })}
         />
-        {type === "none" && (
+        {type === "none" && secondThumbPosition !== undefined && (
           <S.Thumb
             position={
               ((secondThumbPosition - minValue) / (maxValue - minValue)) * 100

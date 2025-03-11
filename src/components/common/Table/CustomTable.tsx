@@ -1,5 +1,6 @@
 import React from "react";
 
+import Image from "next/image";
 import * as S from "./CustomTable.style";
 import { TableComponentProps } from "./CustomTable.type";
 
@@ -43,21 +44,21 @@ const CustomTable = <T,>({
       </S.StyledTable>
       {pagination && (
         <S.PaginationWrapper>
-          <button
+          <S.PaginationButton
             disabled={pagination.current === 1}
             onClick={pagination.prevOnChange}
           >
-            Prev
-          </button>
+            <Image src={"/arrow-left.png"} width={13} height={13} alt="이전" />
+          </S.PaginationButton>
           <span>
             {pagination.current} ... {Math.ceil(pagination.total!)}
           </span>
-          <button
+          <S.PaginationButton
             disabled={pagination.current! >= pagination.total!}
             onClick={pagination.nextOnChange}
           >
-            Next
-          </button>
+            <Image src={"/arrow-right.png"} width={13} height={13} alt="다음" />
+          </S.PaginationButton>
         </S.PaginationWrapper>
       )}
     </S.TableWrapper>

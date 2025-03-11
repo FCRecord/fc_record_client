@@ -59,3 +59,18 @@ export const PaginationWrapper = styled.div`
     }
   }
 `;
+
+export const PaginationButton = styled.button`
+  width: 13px;
+  height: 13px;
+  border: none !important;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

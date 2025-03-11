@@ -38,7 +38,7 @@ const Main = () => {
 
   return (
     <S.container>
-      <div style={{ width: "80%" }}>
+      <div style={{ width: "80%", backgroundColor: "white", padding: "20px" }}>
         <CustomTable
           columns={columns}
           dataSource={data}

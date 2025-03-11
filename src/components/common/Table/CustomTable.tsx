@@ -22,7 +22,7 @@ const CustomTable = <T,>({
         <tbody>
           {dataSource.length > 0 ? (
             dataSource.map((record, rowIndex) => (
-              <tr key={rowIndex}>
+              <S.StyledTr key={rowIndex}>
                 {columns.map((col) => (
                   <S.StyledTd key={col.key}>
                     {col.render
@@ -30,7 +30,7 @@ const CustomTable = <T,>({
                       : String(record[col.dataIndex] ?? "")}
                   </S.StyledTd>
                 ))}
-              </tr>
+              </S.StyledTr>
             ))
           ) : (
             <tr>
@@ -50,7 +50,7 @@ const CustomTable = <T,>({
             Prev
           </button>
           <span>
-            Page {pagination.current} ... {Math.ceil(pagination.total!)}
+            {pagination.current} ... {Math.ceil(pagination.total!)}
           </span>
           <button
             disabled={pagination.current! >= pagination.total!}

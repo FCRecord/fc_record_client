@@ -12,6 +12,11 @@ export const TEXT = {
     color: var(--black-1);
     font-size: 15px;
   `,
+  black1_12px: css`
+    font-family: "Noto Sans", sans-serif;
+    color: var(--black-1);
+    font-size: 12px;
+  `,
 } as const;
 
 export type TextKey = keyof typeof TEXT;

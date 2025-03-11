@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
+import { TEXT } from "@/styles/TextStyle";
+
 export const TableWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
-  border: 1px solid #ddd;
   border-radius: 8px;
 `;
 
@@ -12,23 +13,30 @@ export const StyledTable = styled.table`
   border-collapse: collapse;
 `;
 
+export const StyledTr = styled.tr`
+  &:hover {
+    background-color: var(--gray-4);
+  }
+`;
+
 export const StyledTh = styled.th`
   padding: 12px;
-  background: #f5f5f5;
-  border-bottom: 2px solid #ddd;
+  background: var(--gray-3);
+  border-bottom: 1px solid var(--gray-4);
+  ${TEXT.black1_12px}
   text-align: left;
 `;
 
 export const StyledTd = styled.td`
   padding: 12px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--gray-4);
+  ${TEXT.black1_12px}
 `;
 
 export const EmptyRow = styled.td`
   padding: 16px;
   text-align: center;
-  font-size: 14px;
-  color: #888;
+  ${TEXT.black1_12px}
 `;
 
 export const PaginationWrapper = styled.div`
@@ -37,7 +45,7 @@ export const PaginationWrapper = styled.div`
   align-items: center;
   padding: 10px;
   background: #fff;
-  border-top: 1px solid #ddd;
+  ${TEXT.black1_12px}
 
   button {
     padding: 5px 10px;

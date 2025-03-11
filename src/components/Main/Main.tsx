@@ -24,18 +24,6 @@ const Main = () => {
     { key: "3", name: "Alice", age: 25, address: "Chicago" },
   ];
 
-  const prevOnChange = () => {
-    setCurrentPage(currentPage - 1);
-  };
-
-  const nextOnChange = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const lastOnChange = () => {
-    setCurrentPage(totalPage);
-  };
-
   return (
     <S.container>
       <div style={{ width: "80%", backgroundColor: "white", padding: "20px" }}>
@@ -44,10 +32,8 @@ const Main = () => {
           dataSource={data}
           pagination={{
             current: currentPage,
+            setCurrent: setCurrentPage,
             total: totalPage,
-            prevOnChange,
-            nextOnChange,
-            lastOnChange,
           }}
         ></CustomTable>
       </div>

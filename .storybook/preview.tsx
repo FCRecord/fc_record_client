@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { Preview } from "@storybook/react";
-import GlobalStyle from "../src/styles/GlobalStyle"; // GlobalStyle의 경로 확인
+import GlobalStyle from "../src/styles/GlobalStyle";
 
 const preview: Preview = {
   parameters: {

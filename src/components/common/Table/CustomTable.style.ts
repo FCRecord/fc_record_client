@@ -41,23 +41,10 @@ export const EmptyRow = styled.td`
 
 export const PaginationWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background: #fff;
+  background: var(--white-1);
   ${TEXT.black1_12px}
-
-  button {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    background: #fff;
-    cursor: pointer;
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
 `;
 
 export const PaginationButton = styled.button`
@@ -65,7 +52,7 @@ export const PaginationButton = styled.button`
   height: 13px;
   border: none !important;
   outline: none;
-  background-color: transparent;
+  background: var(--white-1);
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: center;
@@ -73,4 +60,25 @@ export const PaginationButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+export const PageNumber = styled.button<{ isActive: boolean }>`
+  width: 25px;
+  height: 25px;
+  border: none;
+  color: ${({ isActive }) => (isActive ? "var(--blue-2)" : "var(--black-1)")};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white-1);
+
+  &:hover {
+    color: var(--orange-1);
+  }
 `;

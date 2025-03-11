@@ -8,9 +8,7 @@ export interface ColumnType<T> {
 export interface PaginationType {
   current?: number;
   total?: number;
-  prevOnChange?: () => void;
-  nextOnChange?: () => void;
-  lastOnChange?: () => void;
+  setCurrent?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface TableComponentProps<T> {
@@ -20,4 +18,10 @@ export interface TableComponentProps<T> {
   locale?: {
     emptyText?: string;
   };
+}
+
+export interface PaginationDotsProps {
+  type: "dots-left" | "dots-right";
+  setCurrent: React.Dispatch<React.SetStateAction<number>>;
+  totalPage: number;
 }

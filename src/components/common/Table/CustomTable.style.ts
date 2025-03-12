@@ -42,6 +42,7 @@ export const EmptyRow = styled.td`
 export const PaginationWrapper = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   padding: 10px;
   background: var(--white-1);
   ${TEXT.black1_12px}

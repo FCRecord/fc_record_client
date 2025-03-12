@@ -25,3 +25,15 @@ export interface PaginationDotsProps {
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
   totalPage: number;
 }
+
+export interface PaginationButtonProps {
+  onClick: () => void;
+  disabled: boolean;
+  type: "prev" | "next";
+}
+
+export interface PaginationNumberProps {
+  page: number;
+  isActive: boolean;
+  handleClick: () => void;
+}

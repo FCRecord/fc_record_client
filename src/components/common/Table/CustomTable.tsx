@@ -1,8 +1,9 @@
 import React from "react";
 
-import Image from "next/image";
 import * as S from "./CustomTable.style";
 import PaginationDots from "./Pagination/PaginationDots";
+import PaginationButton from "./Pagination/PaginationButton";
+import PaginationNumber from "./Pagination/PaginationNumber";
 import { TableComponentProps } from "./CustomTable.type";
 import {
   generatePagination,
@@ -51,14 +52,13 @@ const CustomTable = <T,>({
       </S.StyledTable>
       {pagination && (
         <S.PaginationWrapper>
-          <S.PaginationButton
+          <PaginationButton
+            type="prev"
             disabled={pagination.current === 1}
             onClick={() =>
               prevPageOnChange(pagination.current!, pagination.setCurrent!)
             }
-          >
-            <Image src={"/arrow-left.png"} width={13} height={13} alt="이전" />
-          </S.PaginationButton>
+          />
           {generatePagination(
             pagination?.current ?? 1,
             pagination?.total ?? 1
@@ -71,25 +71,23 @@ const CustomTable = <T,>({
                   setCurrent={pagination.setCurrent!}
                 />
               ) : (
-                <S.PageNumber
+                <PaginationNumber
+                  page={Number(page)}
                   isActive={pagination.current === page}
-                  onClick={() =>
+                  handleClick={() =>
                     changePage(Number(page), pagination.setCurrent!)
                   }
-                >
-                  {page}
-                </S.PageNumber>
+                />
               )}
             </div>
           ))}
-          <S.PaginationButton
+          <PaginationButton
+            type="next"
             disabled={pagination.current! >= pagination.total!}
             onClick={() =>
               nextPageOnChange(pagination.current!, pagination.setCurrent!)
             }
-          >
-            <Image src={"/arrow-right.png"} width={13} height={13} alt="다음" />
-          </S.PaginationButton>
+          />
         </S.PaginationWrapper>
       )}
     </S.TableWrapper>

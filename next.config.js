@@ -3,8 +3,6 @@ module.exports = {
     styledComponents: true,
   },
   transpilePackages: [
-    "antd",
-    "@ant-design",
     "rc-util",
     "rc-pagination",
     "rc-picker",

@@ -12,8 +12,11 @@ const GlobalStyle = createGlobalStyle`
     --white-1: #ffffff;
     --gray-1: #e5e5e5;
     --gray-2: #ccc;
+    --gray-3: #fafafa;
+    --gray-4: #f0f0f0;
     --orange-1: #fca311;
     --blue-1: #14213D;
+    --blue-2: #1676fe;
   }
 
   html, body {

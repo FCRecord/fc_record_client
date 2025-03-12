@@ -1,62 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
 import { StoryFn, Meta } from "@storybook/react";
+
 import CustomTable from "./CustomTable";
-import { TableProps } from "antd";
+import CustomCheckBox from "../CheckBox";
+import { TableProps, ColumnType } from "./CustomTable.type";
+
+const columns: ColumnType<{
+  key: string;
+  test1: string;
+  test2: number;
+  test3: string;
+  selectTest?: boolean;
+}>[] = [
+  { title: "Test1", dataIndex: "test1", key: "test1" },
+  { title: "Test2", dataIndex: "test2", key: "test2" },
+  { title: "Test3", dataIndex: "test3", key: "test3" },
+  {
+    title: "SelectTest",
+    dataIndex: "selectTest",
+    key: "selectTest",
+    render: (_, record) => (
+      <CustomCheckBox
+        label={record?.test1}
+        disabled={false}
+        defaultChecked={record?.selectTest ?? false}
+      />
+    ),
+  },
+];
+
+const data = [
+  {
+    key: "1",
+    test1: "test1-data1",
+    test2: 1,
+    test3: "test3-data1",
+    selectTest: true,
+  },
+  {
+    key: "2",
+    test1: "test1-data2",
+    test2: 2,
+    test3: "test3-data2",
+    selectTest: false,
+  },
+  {
+    key: "3",
+    test1: "test1-data3",
+    test2: 3,
+    test3: "test3-data3",
+    selectTest: true,
+  },
+];
 
 export default {
   title: "Components/Common/Table",
   component: CustomTable,
   args: {
-    columns: [
-      {
-        title: "Test1",
-        dataIndex: "Test1",
-        key: "Test1",
-      },
-      {
-        title: "Test2",
-        dataIndex: "Test2",
-        key: "Test2",
-      },
-      {
-        title: "Test3",
-        dataIndex: "Test3",
-        key: "Test3",
-      },
-    ],
-    dataSource: [
-      {
-        key: "1",
-        Test1: "Test1",
-        Test2: "Test1",
-        Test3: "Test1",
-      },
-      {
-        key: "2",
-        Test1: "Test2",
-        Test2: "Test2",
-        Test3: "Test2",
-      },
-      {
-        key: "3",
-        Test1: "Test3",
-        Test2: "Test2",
-        Test3: "Test3",
-      },
-    ],
-    pagination: false,
+    columns,
+    dataSource: data,
+    pagination: {
+      total: 10,
+    },
   },
-  argTypes: {
-    style: { control: "object" },
-    pagination: { control: "boolean" },
-  },
-} as Meta<TableProps<unknown>>;
+} as Meta<
+  TableProps<{
+    key: string;
+    test1: string;
+    test2: number;
+    test3: string;
+  }>
+>;
 
-const Template: StoryFn<TableProps<unknown>> = (args) => (
-  <CustomTable {...args} />
-);
+const Template: StoryFn<typeof CustomTable> = (args) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  return (
+    <div style={{ width: "80%", backgroundColor: "white", padding: "20px" }}>
+      <CustomTable
+        {...args}
+        columns={columns}
+        dataSource={data}
+        pagination={{
+          current: currentPage,
+          setCurrent: setCurrentPage,
+          total: args.pagination?.total,
+        }}
+      />
+    </div>
+  );
+};
 
 export const Default = Template.bind({});
-Default.args = {
-  pagination: false,
-};
+Default.args = {};

@@ -27,18 +27,18 @@ export const CheckImageWrapper = styled.div<{
     if ($disabled) {
       return css`
         border: 1px solid black;
-        background-color: gray;
+        background-color: var(--gray-1);
       `;
     }
 
     return $checked
       ? css`
           border: 1px solid black;
-          background-color: green;
+          background-color: var(--orange-1);
         `
       : css`
           border: 1px solid black;
-          background-color: white;
+          background-color: var(--white-1);
         `;
   }}
 `;

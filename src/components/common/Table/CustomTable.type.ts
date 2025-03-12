@@ -1,7 +1,7 @@
 export interface ColumnType<T> {
   title: string;
   dataIndex: keyof T;
-  key: string;
+  key: string | number;
   render?: (value: T[keyof T], record?: T, index?: number) => React.ReactNode;
 }
 
@@ -11,7 +11,7 @@ export interface PaginationType {
   setCurrent?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export interface TableComponentProps<T> {
+export interface TableProps<T> {
   columns: ColumnType<T>[];
   dataSource: T[];
   pagination?: PaginationType;

@@ -4,7 +4,7 @@ import * as S from "./CustomTable.style";
 import PaginationDots from "./Pagination/PaginationDots";
 import PaginationButton from "./Pagination/PaginationButton";
 import PaginationNumber from "./Pagination/PaginationNumber";
-import { TableComponentProps } from "./CustomTable.type";
+import { TableProps } from "./CustomTable.type";
 import {
   generatePagination,
   prevPageOnChange,
@@ -17,7 +17,7 @@ const CustomTable = <T,>({
   dataSource,
   pagination,
   locale,
-}: TableComponentProps<T>) => {
+}: TableProps<T>) => {
   return (
     <S.TableWrapper>
       <S.StyledTable>
